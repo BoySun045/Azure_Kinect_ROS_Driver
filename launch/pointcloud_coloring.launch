@@ -1,0 +1,25 @@
+<launch>
+
+    <node pkg="azure_kinect_ros_driver"
+            name="cloud_coloring_node"
+            type="cloud_coloring_node"
+            cwd="node"
+            output="screen">
+        <param name="cloud_topic" value="/depth_to_rgb/image_raw" />
+        <param name="cloud_frame" value="rgb_camera_link" />
+        <rosparam param="image_topics">
+          - /pickelhaube/cam0/image
+          - /pickelhaube/cam1/image
+          - /pickelhaube/cam2/image
+          - /pickelhaube/cam3/image
+        </rosparam>
+        <rosparam param="caminfo_topics">
+          - /pickelhaube/cam0/camera_info
+          - /pickelhaube/cam1/camera_info
+          - /pickelhaube/cam2/camera_info
+          - /pickelhaube/cam3/camera_info
+        </rosparam>
+        <param name="output_topic" value="colored_cloud" />
+    </node>
+
+</launch>

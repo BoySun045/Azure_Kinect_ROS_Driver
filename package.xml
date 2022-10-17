@@ -29,8 +29,12 @@
   <depend>xacro</depend>
   <depend>cv_bridge</depend>
   <depend>K4A</depend>
+  <depend>pcl_ros</depend>
 
   <exec_depend>rgbd_launch</exec_depend>
+  <!-- <exec_depend>pcl_conversions</exec_depend>
+  <exec_depend>pcl_msgs</exec_depend>
+  <exec_depend>pcl_ros</exec_depend> -->
   <depend>OpenCV</depend>
 
   <export>

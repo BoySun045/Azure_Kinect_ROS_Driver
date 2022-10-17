@@ -20,6 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
   nodelet
   tf2
   tf2_ros
+  pcl_ros
   tf2_geometry_msgs
   geometry_msgs
   nodelet
@@ -27,7 +28,10 @@ find_package(catkin REQUIRED COMPONENTS
   camera_info_manager
 )
 
+
+
 find_package(OpenCV REQUIRED)
+find_package(PCL REQUIRED)
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -58,6 +62,12 @@ add_executable(${PROJECT_NAME}_node
   src/k4a_ros_device_params.cpp
   src/k4a_calibration_transform_data.cpp
   )
+
+add_executable(cloud_coloring_node
+  src/cloud_coloring_node.cpp
+  )
+
+# target_link_libraries(cloud_coloring_node ${PROJECT_NAME})
 
 target_compile_features(${PROJECT_NAME}_node PUBLIC cxx_std_11)
 
@@ -219,12 +229,23 @@ include(Installk4a)
 include_directories(
   ${catkin_INCLUDE_DIRS}
   "include"
+  /usr/include/pcl-1.10/
+  ${PCL_INCLUDE_DIRS}
 )
+Include_directories(${PCL_INCLUDE_DIRS}) 
+link_directories(${PCL_LIBRARY_DIRS})
+
 
 target_link_libraries(${PROJECT_NAME}_node
   ${K4A_LIBS}
   ${catkin_LIBRARIES}
   ${OpenCV_LIBS}
+)
+
+target_link_libraries(cloud_coloring_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBS}
+  ${PCL_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}_nodelet
